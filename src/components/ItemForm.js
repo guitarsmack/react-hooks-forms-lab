@@ -1,9 +1,20 @@
 import React from "react";
 import { v4 as uuid } from "uuid";
 
-function ItemForm(props) {
+function ItemForm({onItemFormSubmit}) {
+
+  function updateItems(event){
+    event.preventDefault()
+    const newItem = {
+      id: uuid(), // the `uuid` library can be used to generate a unique id
+      name: event.target.name.value,
+      category: event.target.category.value,
+    };
+    onItemFormSubmit(newItem)
+  }
+
   return (
-    <form className="NewItem">
+    <form onSubmit={updateItems} className="NewItem">
       <label>
         Name:
         <input type="text" name="name" />
